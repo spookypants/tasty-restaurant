@@ -14,9 +14,8 @@
   <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./css/style.css"/>
 
-
-</head>
-<body>
+  </head>
+  <body>
     <!-- Header -->
     <div class="container">
         <div class="jumbotron">
@@ -28,9 +27,69 @@
             <a href="/reserve.html"><button class="btn btn-danger btn-lg"><span class="fa fa-credit-card"></span> Make Reservation</button></a>
             <a href="/home.html"><button class="btn btn-primary btn-lg"><span class="fa fa-home"></span></button></a>
         </div>
+
+        <div class="row">
+
+          <div class="col-12">
+    
+            <div class="card">
+              <div class="card-header">
+                <h3>Table Reservation</h3>
+              </div>
+              <div class="card-body">
+                <form method="POST" role="form">
+    
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name">
+                  </div>
+    
+                  <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" class="form-control" id="phone">
+                  </div>
+    
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email">
+                  </div>
+    
+                  <div class="form-group">
+                    <label for="uniqueId">Unique ID</label>
+                    <input type="text" class="form-control" id="uniqueId">
+                  </div>
+    
+                </form>
+                <br>
+                <div class="text-right">
+                  <button type="submit" class="btn btn-primary btn-md" id="add-btn"><span class="fa fa-fire"></span> Submit Reservation</button>
+                </div>
+              </div>
+            </div>
+    
+          </div>
         </div>
     </div>
 
+    <script type="text/javascript">
+      // 
+      $("#add-btn").on("click", function(event) {
+        event.preventDefault();
+        var reservationInfo = {
+          name: $("#name").val().trim(),
+          phone: $("#phone").val().trim(),
+          email: $("#email").val().trim(),
+          uniqueId: $("#uniqueId").val().trim()
+        };
+  
+        // 
+        $.post("/api/reservations", reservationInfo)
+          .then(function(data) {
+            console.log("add.html", data);
+            alert("Adding reservation...");
+          });
+      });
+    </script>
 
-</body>
+  </body>
 </html>
